@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todolist</title>
+    <script>
+        var users = ['Eren', 'Mikasa', 'Levi', 'Armin'];
+
+        function doSearch(search) {
+            var searchFilter = [];
+            if (search.trim() !== "") {
+                for (var k = 0; k < users.length; k++) {
+                    if (users[k].includes(search)) {
+                        searchFilter.push(users[k]);
+                    }
+                }
+            } else {
+                searchFilter = users;
+            }
+
+            displayList(searchFilter);
+        }
+
+        function edit(index) {
+            var editForm = document.getElementById("editform");
+            editForm.style.display = "block";
+            editForm.onsubmit = function(event) {
+                event.preventDefault();
+                users[index] = document.getElementById("editUsername").value;
+                displayList(users);
+                editForm.style.display = "none";
+            }
+            document.getElementById("editUsername").value = users[index];
+        }
+
+        function toDelete(index) {
+            if (confirm("Are you sure you want to delete this?")) {
+                users.splice(index, 1);
+                displayList(users);
+            }
+        }
+
+        function displayList(userList) {
+            var template = "<ul>";
+            for (var i = 0; i < userList.length; i++) {
+                template += "<li>" + userList[i] +
+                    "<button onclick='edit(" + i + ")'>Edit</button>" +
+                    "<button onclick='toDelete(" + i + ")'>Delete</button></li>";
+            }
+            template += "</ul>";
+            document.getElementById("list").innerHTML = template;
+        }
+
+        function manageUsers(op) {
+            var username = document.getElementById('username').value;
+            if (username) {
+                switch (op) {
+                    case 'push':
+                        users.push(username);
+                        break;
+                    case 'pop':
+                        users.pop(username);
+                        break;
+                    case 'shift':
+                        users.shift(username);
+                        break;
+                    case 'unshift':
+                        users.unshift(username);
+                        break;
+                }
+                document.getElementById("username").value = "";
+                displayList(users);
+            } else {
+                alert('Please enter a valid username');
+            }
+        }
+    </script>
+</head>
+<body onload="displayList(users)">
+    <h1>List of Users</h1>
+    Search: <input type="text" onkeyup="doSearch(this.value)">
+    <div id="searchfield"></div>
+    <div style="display: none;" id="editform">
+        <h2>Edit Array Elements</h2>
+        <form id="editUserForm">
+            Username: <input type="text" id="editUsername">
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <div id="list"></div>
+    <br><br>
+    Username: <input type="text" id="username"><br><br>
+    <button onclick="manageUsers('push')">Push</button>
+    <button onclick="manageUsers('pop')">Pop</button>
+    <button onclick="manageUsers('shift')">Shift</button>
+    <button onclick="manageUsers('unshift')">Unshift</button>
+</body>
+</html>

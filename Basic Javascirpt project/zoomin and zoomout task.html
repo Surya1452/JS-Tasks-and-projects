@@ -1,0 +1,23 @@
+<html>
+<body>
+   <h2>zoom in and zoom out</h3>
+   <img src ="https://imgs.search.brave.com/fsP3GhwmuGY44hHu_0f8eAV8NyYVFjkDzRQnNIspsVA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jZG4udHJpcGFk/dmlzb3IuY29tL21l/ZGlhL3Bob3RvLW8v/MDMvMzcvZjIvMTEv/ZG9kYWJldHRhLXRl/YS1tdXNldW0uanBn" height = "300px" width = "600px" alt = "ooty lake" id = "image"> <br> <br>
+   <button onclick = "ZoomIn()"> Zoom IN </button>
+   <button onclick = "ZoomOut()"> Zoom Out </button>
+   <script>
+      let image = document.getElementById('image');
+      function ZoomIn() {
+         let width = image.clientWidth;
+         let height = image.clientHeight;
+         image.style.width = (width + 50) + "px";
+         image.style.height = (height + 50) + "px";
+      }
+      function ZoomOut() {
+         let width = image.clientWidth;
+         let height = image.clientHeight;
+         image.style.width = (width - 50) + "px";
+         image.style.height = (height - 50) + "px";
+      }
+   </script>
+</body>
+</html>

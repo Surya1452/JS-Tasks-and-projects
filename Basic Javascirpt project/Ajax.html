@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style> 
+    .img{
+      width: 300px;
+      height: 400px;
+    }
+  </style>
+</head>
+<script>
+  function getMovieInfo(mname) {
+      
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+          
+          if(xhttp.readyState === 4) {
+              document.getElementById("minfo").style.display = "block";
+              document.getElementById("loader").style.display = "none";
+              console.log(xhttp.responseText);
+          } else {
+              document.getElementById("minfo").style.display = "none";
+              document.getElementById("loader").style.display = "block";
+          }
+      }
+
+
+      xhttp.open("GET", "https://www.omdbapi.com/?t=theri&apikey=c429066e");
+      xhttp.send();
+  }
+</script>
+</head>
+<body>
+Movie Name: <input type="text" onblur="getMovieInfo(this.value)"> <br><br>
+
+<div id="minfo" style="display: none;">
+  <h1>Movie Info</h1>
+  <h3>Theri</h3>
+  <img class="img" src="https://imgs.search.brave.com/iMy9K8_9YTUluRATIN8rgXacp8_IPwt_n4Oj-MbQ3HA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvZW4vdGh1bWIv/ZC9kYi9UaGVyaV9w/b3N0ZXIuanBnLzUx/MnB4LVRoZXJpX3Bv/c3Rlci5qcGc" alt="theri"> <p>Rating : 7.3</p>
+</div>
+
+<div id="loader" style="display: none;">
+  <img src="loader.gif" alt="">
+</div>
+</body>
+</html>

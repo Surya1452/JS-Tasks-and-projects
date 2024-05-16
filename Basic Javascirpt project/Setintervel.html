@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to my page</title>
+    <script>
+
+        function  showmessage() {
+           
+            var data=window.document.title;
+            var  msg = '';
+            for(var i=0;i<data.length;++i) {
+                (function(index){
+                    setTimeout(function(){
+                       msg += data[index];
+                       document.getElementById( "print" ).innerHTML=msg ;
+                       document.getElementById( "print").style.color="Green";
+                       },1000*index);
+                })(i)
+                   
+                
+            }
+            }
+
+        
+    </script>
+
+</head>
+<body>
+    <button onclick="showmessage()">GET TITLE</button>
+    <P id="print"></p>
+
+</body>
+</html>

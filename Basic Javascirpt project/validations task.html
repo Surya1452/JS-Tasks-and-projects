@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validations</title>
+    <script>
+        function doValidation(op) {
+
+            switch (op) {
+                case "mail":
+                    var email = document.getElementById("gmail").value;
+                    var resultEmail = !!email.match(/^([a-zA-Z0-9_\-\.\$]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,12})$/);
+                    if(resultEmail){
+                        document.getElementById("res").innerHTML = "valid email";
+                        document.getElementById("res").style.color="Green";
+                    }                                                                                                                                                                                                                           else {
+                        document.getElementById("res").innerHTML = "invalid email";
+                        document.getElementById("res").style.color="Red";
+                    }
+                    break;
+
+                case "url":
+                    var url = document.getElementById("url").value;
+                    var resultUrl =!!url.match(/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]))?(?:\?([^#]))?(?:#(.*))?$/);
+                    if(resultUrl){
+                        document.getElementById("test").innerHTML= "valid url";
+                        document.getElementById("test").style.color="Green";
+                    }else{
+                        document.getElementById("test").innerHTML= "invalid url";
+                        document.getElementById("test").style.color="Red";
+                    }
+                    break;
+
+                case "phone":
+                var phone = document.getElementById("number").value;
+                var resultPhone=!!phone.match(/^[2-9]\d{2}[2-9]\d{2}\d{4}$/);
+                if(resultPhone){
+                        document.getElementById("call").innerHTML = "valid Phone number";
+                        document.getElementById("call").style.color="Green";
+                    }else{
+                        document.getElementById("call").innerHTML = "invalid phone number";
+                        document.getElementById("call").style.color="Red";
+                    }
+                    break;  
+                }
+
+            }
+            function dotrim(up){
+                var name=document.getElementById("name").value;
+                
+                var resultTrim=name.trim();
+                document.getElementById("name").value=resultTrim;
+            }
+            function doAddCoupon(io){
+                var coupon=document.getElementById("coupon").value;
+                var resultCoupon=coupon.toUpperCase();
+                document.getElementById("coupon").value=resultCoupon;
+            }
+        </script>
+</head>
+
+<body>
+    <h1>1. Validations</h1>
+
+    Email: <input type="text" id="gmail" onblur="doValidation('mail')"> 
+    <span id="res"></span><br><br>
+    Url: <input type="text" id="url" onblur="doValidation('url')">
+    <span id="test"></span><br><br>
+    Phone no: <input type="text" id="number" onblur="doValidation('phone')">
+    <span id="call"></span><br><br>
+
+    <h1>2. Trim</h1>
+
+    Data: <input type="text" id="name" onblur="dotrim('trim')"><br><br>
+    
+
+    <h1>3. Apply Coupon</h1>
+
+    Coupon Code: <input type="text" id="coupon" onblur="doAddCoupon('add')"> <br><br>
+</body>
+
+</html>

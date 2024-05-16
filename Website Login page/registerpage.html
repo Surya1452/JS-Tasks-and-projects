@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .form{
+        box-sizing: border-box;
+        padding: 2rem;
+        border-radius: 1rem;
+        background-color: hsl(hue, saturation, lightness);
+        border: 4px solid hsl(0, 0%, 90%);
+        display: grid;
+        gap: 1rem;
+        background-color: lightyellow;
+        justify-content: center; 
+        align-items: center;
+      }
+  </style>
+  <script>
+    function validateform() {
+        var uid = document.getElementById("userid").value;
+        var uemail = document.getElementById("email").value;
+        var upwd = document.getElementById("pwd").value;
+        var ucpwd = document.getElementById("cpwd").value;
+        var ucountry = document.getElementById("country").value;
+        var ugender = document.querySelector('input[name="gender"]:checked');
+        var address = document.getElementById("desc").value;
+       
+
+
+        if (uid == "" || uemail == "" || upwd == "" || ucpwd == "" || ucountry == "" || ugender == null || address == "") {
+            alert('Please fill out all fields');
+            return false;
+        }
+
+        if (!userid_validation(uid, 5, 15)) {
+            return false;
+        }
+
+        if (!email_validation(uemail)) {
+            return false;
+        }
+
+        if (!pwd_check(upwd, ucpwd)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function userid_validation(uid, mx, my) {
+        var uid_len = uid.length;
+        if (uid_len == 0 || uid_len >= my || uid_len < mx) {
+            alert("User Id should not be empty / length be between " + mx + " to " + my);
+            document.getElementById("userid").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function email_validation(uemail) {
+        var regExp = /\S+@\S+\.\S+/;
+        if (!regExp.test(uemail)) {
+            alert('Email is invalid! Please check your input');
+            document.getElementById("email").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function pwd_check(upwd, ucpwd) {
+        if (upwd !== ucpwd) {
+            alert('Password and confirm password are different! Please check your input');
+            return false;
+        }
+        return true;
+
+        var form  = { username : name,uemail: email ,upassword : password,ucountry: country,ugender: gender,address: add};
+        var vform = JSON.parse(localStorage.getItem("formdata"));
+        vform.push(form);
+        localStorage.getItem("formdata",JSON.stringify(form));
+        
+
+    }
+</script>
+</head>
+<div class="form" id="signup">
+    <h1>Registration Form</h1>
+    <form name='registration' onsubmit="return validateform();">
+        <label for="userid">User id: 
+            <input type="text" name="userid" id="userid" />
+        </label><br><br>
+        <label for="email">Email:
+            <input type="text" name="email" id="email" />
+        </label><br><br>
+        <label for="pwd">Password:
+            <input type="password" name="pwd" id="pwd" />
+        </label><br><br>
+
+        <label for="cpwd">Confirm Password:
+            <input type="password" name="cpwd" id="cpwd" />
+        </label><br><br>
+        <label for="country">Country:
+            <select name="country" id="country">
+                <option selected="" value="Default">(Please select a country)</option>
+                <option>Australia</option>
+                <option>Canada</option>
+                <option>India</option>
+                <option>Russia</option>
+                <option>USA</option>
+            </select>
+        </label><br><br>
+        Gender:
+        <div>
+            <input name="gender" type="radio" value="male" id="male">
+            <label for="male">Male</label>
+            <input name="gender" type="radio" value="female" id="female">
+            <label for="female">Female</label>
+        </div><br><br>
+        
+        Address:
+        <label for="desc">
+            <textarea cols="20" rows="10" name="desc" id="desc"></textarea>
+        </label><br><br>
+        <label>
+            <input type="checkbox" name="agree" value="yes" required> Accept terms & conditions.
+        </label><br><br>
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+</div>

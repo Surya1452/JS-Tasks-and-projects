@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>vowels</title>
+    <script>
+        function getVowels(event){
+          data="a,e,i,o,u";
+          var key=event.key.toLowerCase();
+           if(data.indexOf(key)<0){
+            document.getElementById("check").innerHTML="<i>vowel letters only allowed</i>";
+           }else{
+            document.getElementById("check").innerHTML="<b>vowel letters are presented</b>";
+           }
+        }
+    </script>
+</head>
+<body style="text-align: center;background-color: lavender;">
+    Vowelsfilter : <input type="text" onkeypress="getVowels(event)"><br><br>
+    <span id="check"></span>
+</body>
+</html>

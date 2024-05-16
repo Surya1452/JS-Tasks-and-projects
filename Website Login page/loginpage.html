@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form{
+            box-sizing: border-box;
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: hsl(hue, saturation, lightness);
+            border: 4px solid hsl(0, 0%, 90%);
+            display: grid;
+            gap: 1rem;
+            background-color: lightyellow;
+            justify-content: center; 
+            align-items: center;
+          }
+    </style>
+    
+    <script>
+       
+        var fdata = localStorage.getItem("formdata");
+        if (fdata != null) {
+          window.location.href = "./index.html";
+        }
+        
+        function login() {
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+        
+          const xhttp = new XMLHttpRequest();
+          xhttp.open("POST", "http://api.icndb.com/jokes/random");
+          xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhttp.send(
+            JSON.stringify({
+              username: username,
+              password: password,
+            })
+          );
+          xhttp.onload = () => {
+            console.log(xhttp.responseText);
+            var data = JSON.parse(xhttp.responseText);
+            
+            if (!data.success)  {
+              alert("Invalid Username or Password!");
+              } else { 
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("userid ", data.userId);
+                localStorage.setItem("usersign up", false);
+                localStorage.setItem("formdata ", JSON.stringify(data));
+                
+                window.location.href =  "./index.html"  ;
+              };
+          return false;
+        }
+    }
+
+</script>
+</head>
+<body>
+    <div class="form"  id="registration">
+        <form action="login">
+            Username : <input type="text" id="username"/><br /><br />
+            Password : <input type="password" id="password"/><br /><br />
+            <button onclick="login()">Login</button>
+        </form>
+    </div>
+</body>
+</html>

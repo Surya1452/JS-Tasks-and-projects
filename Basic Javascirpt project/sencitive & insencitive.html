@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sensitiveCheck</title>
+    <script>
+        var names = "Eren,Mikasa,Levi,Armin";
+        var list="luffy,zoro,robin,chopper"
+        function insensitiveCheck() {
+        var username=document.getElementById("username").value; 
+        var spanobj=document.getElementById("resgister");
+        var title=new RegExp(username,'i');
+        if(names.search(title)>-1){
+            
+            spanobj.innerHTML="Already taken";
+            spanobj.style.color="red";
+        }else{
+            spanobj.innerHTML="Username Available";
+            spanobj.style.color="green";
+        }
+        }
+
+
+        function sensitiveCheck() {
+         var name=document.getElementById("loginName").value;
+         var object=document.getElementById("final");
+         if(list.indexOf(name)>-1){
+            object.innerHTML="Alread taken";
+            object.style.color="red";
+         }else{
+            object.innerHTML="Username Available";
+            object.style.color="green";
+        }
+        }
+    </script>
+</head>
+<body>
+    <h1>1. Username check as case insensitive</h1>
+    Registered users: <p id="uname"></p>
+    Username: <input type="text"  id="username" onblur="insensitiveCheck()"> 
+    <span id="resgister">
+        <script>
+             document.getElementById('uname').innerHTML=names;
+        </script>
+    </span>
+    <hr>
+
+    <h1>2. Username check with case sensitive</h1>
+    Registered users: <p id="login"></p>
+    Username: <input type="text" id="loginName" onblur="sensitiveCheck()"> 
+    <span id="final"></span>
+    <script>
+    document.getElementById('login').innerHTML=list;
+    </script>
+</body>
+</html>

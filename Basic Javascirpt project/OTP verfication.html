@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTPverification</title>
+    <script>
+        var digits = '0123456789';
+        var OTP = '';
+        var userinput;
+        var n;
+        var timer;
+       
+function generateotp() {
+    
+    OTP="";
+    for (let i = 0; i < 4; i++) {
+		OTP += digits[Math.floor(Math.random() * 10)];
+	}
+    document.getElementById( "showotp" ).innerHTML = OTP;
+	return OTP;
+}
+
+function validateOtp(){
+   
+    var userinput =document.getElementById("verifycode").value;
+   if(OTP== userinput) {
+    alert('Verified');
+   } else {
+    alert('Wrong Input');
+     }
+}
+function timer() {
+    var count =count < 0;
+var interval = setInterval(function() {
+    document.getElementById( "timer" ).innerHTML.value;
+  count--;
+ 
+  if (count === 10) {
+    clearInterval(interval);
+
+  }
+}, 1000);
+document.getElementById( "timer" ).innerHTML = "expires in:"+count;
+    } 
+
+
+
+</script>
+</head>
+<body>
+    <div>
+    <button onclick="generateotp()">GenerateOTP</button>
+    <p id="showotp"></p>
+    verify: <input type="text" id="verifycode"/> <span onclick="validateOtp()">
+        <div>
+        <p> OTP Expires in :</p><span id="time" > </span>
+        </div>
+    </span> 
+    <button style="padding: 6px;" onclick="validateOtp() ">Validate</button><br/>
+       
+</div>
+</body>
+</html>
